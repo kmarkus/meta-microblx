@@ -6,19 +6,26 @@ LICENSE = "eCos-exception-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=40663994a34d497bf17c10d49c3aaeaf"
 HOMEPAGE = "https://github.com/kmarkus/microblx"
 
+PR = "r0"
+PV = "0.3.0"
+TAG = "v${PV}"
 BRANCH = "master"
-SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/kmarkus/microblx.git;branch=master"
+SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};tag=${TAG}"
 
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig externalsrc
+inherit autotools autotools-brokensep pkgconfig
 
-# libs and headers
+# libs, headers and lua modules
 FILES_${PN} += " \
 	${libdir}/libubx.so.0.2.2 \
 	${libdir}/libubx.so.0 \
 	${includedir}/*.h \
+	${datadir}/lua/* \
+	"
+# docs
+FILES_${PN}-doc += " \
+	${datadir}/${PN}/* \
 	"
 
 # dev files
@@ -26,12 +33,5 @@ FILES_${PN}-dev = "${libdir}/*.la \
 	${libdir}/libubx.so \
 	${libdir}/pkgconfig/ubx0.pc"
 
-# lua modules and docs
-FILES_${PN} += "${datadir}/lua/* \
-	${datadir}/${PN}/*"
-
 # blocks
 FILES_${PN} += "${libdir}/${PN}/*"
-
-EXTERNALSRC = "/home/mk/prog/c/microblx"
-EXTERNALSRC_BUILD = "/home/mk/prog/c/microblx"
