@@ -21,6 +21,7 @@ FILES_${PN} += " \
 	${includedir}/*.h \
 	${datadir}/lua/* \
 	"
+
 # blocks
 FILES_${PN} += "${libdir}/microblx/*"
 

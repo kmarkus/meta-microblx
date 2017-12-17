@@ -22,9 +22,13 @@ FILES_${PN} += " \
 	${includedir}/*.h \
 	${datadir}/lua/* \
 	"
+
+# blocks
+FILES_${PN} += "${libdir}/microblx/*"
+
 # docs
 FILES_${PN}-doc += " \
-	${datadir}/${PN}/* \
+	${datadir}/microblx/* \
 	"
 
 # dev files
@@ -33,6 +37,3 @@ FILES_${PN}-dev = " \
 	${libdir}/*.la \
 	${libdir}/pkgconfig/ubx0.pc \
 	"
-
-# blocks
-FILES_${PN} += "${libdir}/${PN}/*"
