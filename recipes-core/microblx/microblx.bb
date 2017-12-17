@@ -18,8 +18,7 @@ inherit autotools autotools-brokensep pkgconfig
 
 # libs, headers and lua modules
 FILES_${PN} += " \
-	${libdir}/libubx.so.0.2.2 \
-	${libdir}/libubx.so.0 \
+	${libdir}/libubx.so.* \
 	${includedir}/*.h \
 	${datadir}/lua/* \
 	"
@@ -29,9 +28,11 @@ FILES_${PN}-doc += " \
 	"
 
 # dev files
-FILES_${PN}-dev = "${libdir}/*.la \
+FILES_${PN}-dev = " \
 	${libdir}/libubx.so \
-	${libdir}/pkgconfig/ubx0.pc"
+	${libdir}/*.la \
+	${libdir}/pkgconfig/ubx0.pc \
+	"
 
 # blocks
 FILES_${PN} += "${libdir}/${PN}/*"
