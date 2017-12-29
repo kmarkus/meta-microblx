@@ -7,14 +7,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=40663994a34d497bf17c10d49c3aaeaf"
 HOMEPAGE = "https://github.com/kmarkus/microblx"
 
 PR = "r0"
-PV = "0.3.0"
+PV = "0.3.1"
 TAG = "v${PV}"
 BRANCH = "master"
 SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};tag=${TAG}"
 
 S = "${WORKDIR}/git"
 
-inherit autotools autotools-brokensep pkgconfig
+inherit autotools pkgconfig
 
 # libs, headers and lua modules
 FILES_${PN} += " \
