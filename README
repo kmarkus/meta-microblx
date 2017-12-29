@@ -1,64 +1,56 @@
-This README file contains information on the contents of the
-microblx layer.
-
-Please see the corresponding sections below for details.
-
+meta-microblx: bitbake layer for the microblx framework
+=======================================================
 
 Dependencies
-============
+------------
 
 This layer depends on:
 
-  URI: git://git.openembedded.org/bitbake
-  branch: master
+  URI: http://git.yoctoproject.org/cgit/cgit.cgi/poky
+  branch: rocko or later
 
-  URI: git://git.openembedded.org/openembedded-core
+  URI: git://git.openembedded.org/meta-openembedded
   layers: meta
-  branch: master
-
-  URI: git://git.yoctoproject.org/xxxx
-  layers: xxxx
-  branch: master
+  branch: rocko
 
 
 Patches
-=======
+-------
 
-Please submit any patches against the microblx layer to the
-xxxx mailing list (xxxx@zzzz.org) and cc: the maintainer:
-
-Maintainer: XXX YYYYYY <xxx.yyyyyy@zzzzz.com>
+Please submit any patches against the microblx layer via the github
+issue tracker https://github.com/kmarkus/meta-microblx.
 
 
-Table of Contents
-=================
-
-  I. Adding the microblx layer to your build
- II. Misc
-
-
-I. Adding the microblx layer to your build
-=================================================
-
---- replace with specific instructions for the microblx layer ---
+Adding the microblx layer to your build
+---------------------------------------
 
 In order to use this layer, you need to make the build system aware of
 it.
 
-Assuming the microblx layer exists at the top-level of your
-yocto build tree, you can add it to the build system by adding the
-location of the microblx layer to bblayers.conf, along with any
-other layers needed. e.g.:
+Assuming the microblx layer exists at the top-level of your yocto
+build tree, you can add it to the build system by adding the location
+of the microblx layer to bblayers.conf, along with any other layers
+needed. e.g.:
 
   BBLAYERS ?= " \
     /path/to/yocto/meta \
     /path/to/yocto/meta-poky \
     /path/to/yocto/meta-yocto-bsp \
     /path/to/yocto/meta-microblx \
+    /path/to/yocto/meta-openembedded/meta-oe \
     "
 
+Building
+--------
 
-II. Misc
-========
+Just run
 
---- replace with specific information about the microblx layer ---
+```sh
+$ bitbake microblx
+```
+
+or to build the latest dev version (may be instable!)
+
+```sh
+$ bitbake microblx-latest
+```
