@@ -21,6 +21,7 @@ FILES_${PN} += " \
 	${libdir}/libubx.so.* \
 	${includedir}/*.h \
 	${datadir}/lua/* \
+	${bindir}/* \
 	"
 
 # blocks
