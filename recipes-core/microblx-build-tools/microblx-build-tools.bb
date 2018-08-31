@@ -14,13 +14,6 @@ SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};tag=${TAG}"
 
 S = "${WORKDIR}/git"
 
-# FILES_${PN} += " \
-# 	${libdir}/libubx.so.* \
-# 	${includedir}/*.h \
-# 	${datadir}/lua/* \
-# 	${bindir}/* \
-# 	"
-
 do_install () {
 	   install -d ${D}${bindir}
 	   install -m755 ${S}/tools/ubx_tocarr ${D}${bindir}/
