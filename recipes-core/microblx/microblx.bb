@@ -1,5 +1,5 @@
 SUMMARY = "Real-time, embedded, reflective function blocks"
-DEPENDS = "luajit luajit-native liblfds uthash"
+DEPENDS = "luajit luajit-native liblfds uthash cproto-native"
 RDEPENDS_${PN} = "luajit liblfds uutils"
 
 LICENSE = "GPL-2.0+ & eCos-exception-2.0"
