@@ -18,17 +18,18 @@ inherit autotools pkgconfig
 # libs, headers and lua modules
 FILES_${PN} += " \
 	${libdir}/libubx.so.* \
-	${includedir}/*.h \
+	${includedir}/ubx/*.h \
+	${includedir}/ubx/*.hexarr \
 	${datadir}/lua/* \
 	${bindir}/* \
 	"
 
 # blocks
-FILES_${PN} += "${libdir}/microblx/*"
+FILES_${PN} += "${libdir}/ubx/*"
 
 # docs
 FILES_${PN}-doc += " \
-	${datadir}/microblx/* \
+	${datadir}/ubx/* \
 	"
 
 # dev files
