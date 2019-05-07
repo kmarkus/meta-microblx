@@ -2,15 +2,17 @@ SUMMARY = "Real-time, embedded, reflective function blocks"
 DEPENDS = "luajit luajit-native liblfds uthash cproto-native"
 RDEPENDS_${PN} = "luajit liblfds uutils"
 
-LICENSE = "GPL-2.0+ & eCos-exception-2.0"
+LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=40663994a34d497bf17c10d49c3aaeaf"
 HOMEPAGE = "https://github.com/kmarkus/microblx"
 
 PR = "r0"
 PV = "0.6.1"
 TAG = "v${PV}"
-BRANCH = "master"
-SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};tag=${TAG}"
+BRANCH = "rtlogging"
+#SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};tag=${TAG}"
+SRC_URI = "git://github.com/hamishguthrie/microblx.git;branch=${BRANCH}"
+SRCREV = "052e6b72d4b186d341e78b208dc54a37d9979c32"
 
 S = "${WORKDIR}/git"
 
@@ -18,23 +20,25 @@ inherit autotools pkgconfig
 
 # libs, headers and lua modules
 FILES_${PN} += " \
-	${libdir}/libubx.so.* \
-	${includedir}/*.h \
+	${libdir}/lib*.so.* \
+	${includedir}/ubx/*.h \
+	${includedir}/ubx/internal/*.h \
+	${includedir}/ubx/*.hexarr \
 	${datadir}/lua/* \
 	${bindir}/* \
 	"
 
 # blocks
-FILES_${PN} += "${libdir}/microblx/*"
+FILES_${PN} += "${libdir}/ubx/*"
 
 # docs
 FILES_${PN}-doc += " \
-	${datadir}/microblx/* \
+	${datadir}/ubx/* \
 	"
 
 # dev files
 FILES_${PN}-dev = " \
-	${libdir}/libubx.so \
+	${libdir}/lib*.so \
 	${libdir}/*.la \
-	${libdir}/pkgconfig/ubx0.pc \
+	${libdir}/pkgconfig/*.pc \
 	"
