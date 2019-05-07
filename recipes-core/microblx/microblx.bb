@@ -12,7 +12,7 @@ TAG = "v${PV}"
 BRANCH = "rtlogging"
 #SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};tag=${TAG}"
 SRC_URI = "git://github.com/hamishguthrie/microblx.git;branch=${BRANCH}"
-SRCREV = "052e6b72d4b186d341e78b208dc54a37d9979c32"
+SRCREV = "2e3c204ff902892fa5c305d3b3790fa65af61f26"
 
 S = "${WORKDIR}/git"
 
