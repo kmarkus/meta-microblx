@@ -2,8 +2,8 @@ SUMMARY = "Real-time, embedded, reflective function blocks"
 DEPENDS = "luajit luajit-native liblfds uthash cproto-native"
 RDEPENDS_${PN} = "luajit liblfds uutils"
 
-LICENSE = "GPL-2.0+ & eCos-exception-2.0"
-LIC_FILES_CHKSUM = "file://COPYING;md5=40663994a34d497bf17c10d49c3aaeaf"
+LICENSE = "MPL-2.0 & BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://COPYING;md5=5e731c30608cf88d4fcd9e57fa60e1f6"
 HOMEPAGE = "https://github.com/kmarkus/microblx"
 
 PR = "r0"
@@ -18,8 +18,8 @@ inherit autotools pkgconfig
 # libs, headers and lua modules
 FILES_${PN} += " \
 	${libdir}/libubx.so.* \
-	${includedir}/ubx/*.h \
-	${includedir}/ubx/*.hexarr \
+	${libdir}/librtlog_client.so.* \
+	${includedir}/ubx/* \
 	${datadir}/lua/* \
 	${bindir}/* \
 	"
@@ -35,7 +35,9 @@ FILES_${PN}-doc += " \
 # dev files
 FILES_${PN}-dev = " \
 	${libdir}/libubx.so \
+	${libdir}/librtlog_client.so \
 	${libdir}/*.la \
 	${libdir}/pkgconfig/ubx0.pc \
+	${libdir}/pkgconfig/ubxrtl0.pc \
 	"
 
