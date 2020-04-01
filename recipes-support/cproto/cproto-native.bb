@@ -1,6 +1,6 @@
 SUMMARY = "cproto - generate C function prototypes and convert function definitions"
 
-LICENSE = "PublicDomain"
+LICENSE = "PD"
 LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=f7a35a56db6d00a39d07c50992d90e77"
 
 VERSION = "4.7m"
