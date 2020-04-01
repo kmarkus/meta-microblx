@@ -9,7 +9,7 @@ HOMEPAGE = "https://github.com/kmarkus/microblx"
 PR = "r0"
 PV = "0.8.0-rc3"
 TAG = "v${PV}"
-BRANCH = "dev"
+BRANCH = "master"
 SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};tag=${TAG}"
 
 require microblx.inc
