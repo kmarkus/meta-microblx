@@ -7,16 +7,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=40663994a34d497bf17c10d49c3aaeaf"
 HOMEPAGE = "https://github.com/kmarkus/microblx"
 
 PR = "r0"
-PV = "0.7.1-rc1"
+PV = "0.8.0-rc2"
 TAG = "v${PV}"
-BRANCH = "master"
+BRANCH = "dev"
 SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};tag=${TAG}"
 
 S = "${WORKDIR}/git"
 
 do_install () {
 	   install -d ${D}${bindir}
-	   install -m755 ${S}/tools/ubx_tocarr ${D}${bindir}/
+	   install -m755 ${S}/tools/ubx-tocarr ${D}${bindir}/
 }
 
 BBCLASSEXTEND = "native nativesdk"
