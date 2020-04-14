@@ -3,7 +3,7 @@ DEPENDS = "luajit-native"
 RDEPENDS_${PN} = "luajit"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=40663994a34d497bf17c10d49c3aaeaf"
+LIC_FILES_CHKSUM = "file://COPYING;md5=5e731c30608cf88d4fcd9e57fa60e1f6"
 HOMEPAGE = "https://github.com/kmarkus/microblx"
 
 PR = "r0"
