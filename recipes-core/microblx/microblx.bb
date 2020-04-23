@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5e731c30608cf88d4fcd9e57fa60e1f6"
 HOMEPAGE = "https://github.com/kmarkus/microblx"
 
 PR = "r0"
-PV = "0.8.0-rc5"
+PV = "0.8.0-rc8"
 TAG = "v${PV}"
 BRANCH = "master"
 SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};tag=${TAG}"
