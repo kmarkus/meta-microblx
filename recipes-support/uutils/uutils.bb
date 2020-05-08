@@ -3,10 +3,10 @@ LICENSE = "MIT"
 RDEPENDS_${PN} = "lua"
 LIC_FILES_CHKSUM = "file://License;md5=596f176fbcaaafa9489a583a69acba69"
 
-PV = "1.1.0"
+PV = "1.1.1"
 PR = "r0"
 BRANCH = "master"
-TAG = "0fcf557b012f52cea6a9806ed1d66ce8b8b61868"
+TAG = "954d58ff8bb0a9db1b8ff9e1be6993423872f378"
 
 SRC_URI = "git://github.com/kmarkus/uutils.git;protocol=https;branch=${BRANCH};tag=${TAG}"
 
