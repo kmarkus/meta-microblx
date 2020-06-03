@@ -11,7 +11,7 @@ This layer depends on:
 
   URI: git://git.openembedded.org/meta-openembedded
   layers: meta
-  branch: rocko
+  branch: rocko or later
 
 
 Patches
