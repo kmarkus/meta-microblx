@@ -1,7 +1,8 @@
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+SRC_URI += "file://0001-make-create-target-for-adding-symlink.patch"
 
-LJPV = "${@'${PV}'.replace('~', '-')}"
+S = "${WORKDIR}/git"
 
-# create luajit symlink to versioned binary
-do_install_append() {
-    ln -s -r ${D}${bindir}/luajit-${LJPV} ${D}${bindir}/luajit
+do_install_append () {
+    oe_runmake ${EXTRA_OEMAKEINST} symlink
 }

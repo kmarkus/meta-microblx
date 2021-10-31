@@ -1,0 +1,27 @@
+From d388138243c21cd7994170b8ea08073a055da550 Mon Sep 17 00:00:00 2001
+From: Markus Klotzbuecher <mk@mkio.de>
+Date: Sun, 31 Oct 2021 18:12:03 +0100
+Subject: [PATCH] make: create target for adding symlink
+
+Signed-off-by: Markus Klotzbuecher <mk@mkio.de>
+---
+ Makefile | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/Makefile b/Makefile
+index aa1b84bd78..2307af53c0 100644
+--- a/Makefile
++++ b/Makefile
+@@ -138,6 +138,9 @@ install: $(INSTALL_DEP)
+ 	@echo "  $(SYMLINK) $(INSTALL_TNAME) $(INSTALL_TSYM)"
+ 	@echo ""
+ 
++symlink:
++	@echo "==== Creating symlink to $(INSTALL_TNAME) from $(INSTALL_TSYM) ===="
++	$(SYMLINK) $(INSTALL_TNAME) $(INSTALL_TSYM)
+ 
+ uninstall:
+ 	@echo "==== Uninstalling LuaJIT $(VERSION) from $(PREFIX) ===="
+-- 
+2.33.0
+
