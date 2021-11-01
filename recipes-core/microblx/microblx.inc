@@ -4,7 +4,7 @@ S = "${WORKDIR}/git"
 inherit autotools pkgconfig
 
 # libs, headers and lua modules
-FILES_${PN} += " \
+FILES:${PN} += " \
 	${libdir}/libubx.so.* \
 	${libdir}/librtlog_client.so.* \
 	${includedir}/ubx/* \
@@ -13,15 +13,15 @@ FILES_${PN} += " \
 	"
 
 # blocks
-FILES_${PN} += "${libdir}/ubx/*"
+FILES:${PN} += "${libdir}/ubx/*"
 
 # docs
-FILES_${PN}-doc += " \
+FILES:${PN}-doc += " \
 	${datadir}/ubx/* \
 	"
 
 # dev files
-FILES_${PN}-dev = " \
+FILES:${PN}-dev = " \
 	${libdir}/libubx.so \
 	${libdir}/librtlog_client.so \
 	${libdir}/*.la \
