@@ -1,0 +1,11 @@
+header:
+  version: 10
+  includes:
+    - ubx.yml
+
+target: core-image-minimal
+
+local_conf_header:
+  bbb: |
+    MACHINE = "beaglebone-yocto"
+    CORE_IMAGE_EXTRA_INSTALL:append = " microblx-latest microblx-latest-doc"
