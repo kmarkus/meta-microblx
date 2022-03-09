@@ -1,19 +1,19 @@
 DESCRIPTION = "A couple of useful Lua modules"
 LICENSE = "MIT"
-RDEPENDS_${PN} = "lua"
+RDEPENDS:${PN} = "lua"
 LIC_FILES_CHKSUM = "file://License;md5=596f176fbcaaafa9489a583a69acba69"
 
 PV = "1.1.2"
 PR = "r0"
 BRANCH = "master"
-TAG = "7dc324dc526101fbf4bbbabf94d7a0b177301939"
+TAG = "9983f4813860d9c750e5aa2b9e6224786431dc79"
 
 SRC_URI = "git://github.com/kmarkus/uutils.git;protocol=https;branch=${BRANCH};tag=${TAG}"
 
 S = "${WORKDIR}/git"
 
 LUA_MODULE_DIR = "/usr/share/lua"
-FILES_${PN} += "\
+FILES:${PN} += "\
 	${LUA_MODULE_DIR}/5.1/strict.lua\
 	${LUA_MODULE_DIR}/5.1/ansicolors.lua\
 	${LUA_MODULE_DIR}/5.1/utils.lua\
