@@ -3,6 +3,8 @@ From: Hamish Guthrie <hamish.guthrie@kistler.com>
 Date: Mon, 31 Oct 2016 14:12:25 +0100
 Subject: [PATCH] Add LGPL
 
+Upstream-Status: Inappropriate
+
 ---
  COPYING | 488 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  1 file changed, 488 insertions(+)

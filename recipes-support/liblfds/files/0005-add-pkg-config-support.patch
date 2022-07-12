@@ -3,6 +3,8 @@ From: Markus Klotzbuecher <mk@@marumbi.de>
 Date: Sun, 5 Nov 2017 17:06:13 +0100
 Subject: [PATCH 5/5] add pkg-config support
 
+Upstream-Status: Inappropriate
+
 ---
  Makefile.am  |  3 +++
  configure.ac | 13 ++++++++++++-

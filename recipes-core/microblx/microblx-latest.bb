@@ -9,6 +9,6 @@ HOMEPAGE = "https://github.com/kmarkus/microblx"
 PR = "r0"
 BRANCH = "dev"
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH}"
+SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};protocol=https"
 
 require microblx.inc

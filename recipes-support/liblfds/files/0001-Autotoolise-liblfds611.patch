@@ -3,6 +3,8 @@ From: Hamish Guthrie <hamish.guthrie@kistler.com>
 Date: Mon, 31 Oct 2016 13:19:46 +0100
 Subject: [PATCH] Autotoolise liblfds611
 
+Upstream-Status: Inappropriate
+
 ---
  Makefile.am                |  3 +++
  configure.ac               | 21 +++++++++++++++++++++

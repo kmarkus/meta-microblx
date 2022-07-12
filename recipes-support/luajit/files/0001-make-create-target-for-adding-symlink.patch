@@ -3,6 +3,8 @@ From: Markus Klotzbuecher <mk@mkio.de>
 Date: Sun, 31 Oct 2021 18:12:03 +0100
 Subject: [PATCH] make: create target for adding symlink
 
+Upstream-Status: Inappropriate
+
 Signed-off-by: Markus Klotzbuecher <mk@mkio.de>
 ---
  Makefile | 3 +++

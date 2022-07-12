@@ -3,7 +3,7 @@ header:
 
 repos:    
   meta/meta-microblx:
-    url: "git://github.com/kmarkus/meta-microblx.git"
+    url: "git@github.com:kmarkus/meta-microblx"
     refspec: "master"
 
   meta/poky:

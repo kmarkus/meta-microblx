@@ -3,6 +3,8 @@ From: Hamish Guthrie <hamish.guthrie@kistler.com>
 Date: Tue, 1 Nov 2016 13:14:31 +0100
 Subject: [PATCH] Add bootstrap file
 
+Upstream-Status: Inappropriate
+
 ---
  bootstrap | 3 +++
  1 file changed, 3 insertions(+)

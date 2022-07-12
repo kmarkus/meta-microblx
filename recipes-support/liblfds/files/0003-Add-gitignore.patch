@@ -3,6 +3,8 @@ From: Hamish Guthrie <hamish.guthrie@kistler.com>
 Date: Mon, 31 Oct 2016 15:49:28 +0100
 Subject: [PATCH] Add .gitignore
 
+Upstream-Status: Inappropriate
+
 ---
  .gitignore | 28 ++++++++++++++++++++++++++++
  1 file changed, 28 insertions(+)

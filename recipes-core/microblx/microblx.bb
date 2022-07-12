@@ -10,6 +10,6 @@ PR = "r0"
 PV = "0.9.1"
 TAG = "v${PV}"
 BRANCH = "master"
-SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};tag=${TAG}"
+SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};tag=${TAG};protocol=https"
 
 require microblx.inc
