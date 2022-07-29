@@ -1,6 +1,6 @@
 SUMMARY = "build helpers for microblx"
 DEPENDS = "luajit-native"
-RDEPENDS_${PN} = "luajit"
+RDEPENDS:${PN} = "luajit"
 
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5e731c30608cf88d4fcd9e57fa60e1f6"
