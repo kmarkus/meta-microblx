@@ -1,3 +1,5 @@
+DEPENDS = "luajit luajit-native liblfds uthash cproto-native"
+RDEPENDS:${PN} += "luajit uutils"
 
 S = "${WORKDIR}/git"
 
