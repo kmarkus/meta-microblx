@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5e731c30608cf88d4fcd9e57fa60e1f6"
 HOMEPAGE = "https://github.com/kmarkus/microblx"
 
 PR = "r0"
-PV = "0.9.1"
-TAG = "v${PV}"
+PV = "0.9.2"
 BRANCH = "master"
-SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};tag=${TAG};protocol=https"
+SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};protocol=https"
+SRCREV = "66c830083461ec5e7e9d5a7f37fef53b8e1fd264"
 
 require microblx.inc
