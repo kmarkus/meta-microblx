@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=f7a35a56db6d00a39d07c509
 
 VERSION = "4.7m"
 
-SRC_URI = "ftp://ftp.invisible-island.net/cproto/cproto-${VERSION}.tgz \
+SRC_URI = "https://invisible-mirror.net/archives/cproto/cproto-4.7m.tgz \
            file://0001-Fix-autotools-build-to-work-with-Yocto.patch \
            "
 
