@@ -3,7 +3,7 @@ RDEPENDS:${PN} += "luajit uutils"
 
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig
+inherit cmake pkgconfig
 
 # libs, headers and lua modules
 FILES:${PN} += " \
