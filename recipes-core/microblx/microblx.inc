@@ -1,7 +1,10 @@
-DEPENDS = "luajit luajit-native liblfds uthash cproto-native"
+DEPENDS = "luajit luajit-native uthash cproto-native"
 RDEPENDS:${PN} += "luajit uutils"
 
 S = "${WORKDIR}/git"
+
+PACKAGECONFIG ??= "USE_LFDS_611"
+PACKAGECONFIG[USE_LFDS_611] = "-DBLOCK_LFDS_CYCLIC=1, -DBLOCK_LFDS_CYCLIC=0, liblfds"
 
 inherit cmake pkgconfig
 
