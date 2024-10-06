@@ -1,0 +1,48 @@
+header:
+  version: 10
+
+target: core-image-minimal
+
+local_conf_header:
+  beagleplay: |
+    MACHINE = "beagleplay"
+    CORE_IMAGE_EXTRA_INSTALL:append = " microblx-latest microblx-latest-doc"
+
+    # not supported
+    PACKAGECONFIG:remove:pn-microblx = " USE_LFDS_611"
+    PACKAGECONFIG:remove:pn-microblx-latest = " USE_LFDS_611"
+
+repos:
+  meta/meta-microblx:
+    url: "git@github.com:kmarkus/meta-microblx"
+    refspec: "master"
+
+  meta/poky:
+    url: "git://git.yoctoproject.org/poky"
+    refspec: "scarthgap"
+    layers:
+      meta:
+      meta-poky:
+      meta-yocto-bsp:
+
+  meta/meta-openembedded:
+    url: "git://git.openembedded.org/meta-openembedded"
+    refspec: "scarthgap"
+    layers:
+      meta-oe:
+      meta-webserver:
+
+  # beagleplay stuff
+  meta/meta-ti:
+    url: "git://git.yoctoproject.org/meta-ti"
+    refspec: "scarthgap"
+    layers:
+      meta-ti-bsp:
+      meta-ti-extras:
+
+  meta/meta-arm:
+    url: "git://git.yoctoproject.org/meta-arm"
+    refspec: "scarthgap"
+    layers:
+      meta-arm:
+      meta-arm-toolchain:
