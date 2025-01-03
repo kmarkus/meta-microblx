@@ -28,6 +28,7 @@ FILES:${PN}-doc += " \
 # dev files
 FILES:${PN}-dev = " \
 	${libdir}/libubx.so \
+	${libdir}/liblfq.so \
 	${libdir}/librtlog_client.so \
 	${libdir}/*.la \
 	${libdir}/pkgconfig/ubx0.pc \
