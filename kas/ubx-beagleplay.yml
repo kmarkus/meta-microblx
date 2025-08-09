@@ -38,6 +38,7 @@ repos:
     refspec: "scarthgap"
     layers:
       meta-ti-bsp:
+      meta-beagle:
       meta-ti-extras:
 
   meta/meta-arm:
