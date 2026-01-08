@@ -20,6 +20,7 @@ FILES:${PN} += " \
 	${libdir}/librtlog_client.so.* \
 	${includedir}/ubx/* \
 	${datadir}/lua/* \
+	${datadir}/ubx/blocks/* \
 	${bindir}/* \
 	"
 
@@ -28,7 +29,7 @@ FILES:${PN} += "${libdir}/ubx/*"
 
 # docs
 FILES:${PN}-doc += " \
-	${datadir}/ubx/* \
+	${datadir}/ubx/examples/* \
 	"
 
 # dev files
