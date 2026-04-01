@@ -49,7 +49,12 @@ Just run
 $ bitbake microblx
 ```
 
-or to build the latest version on master (may be less stable)
+or the latest `dev` version
+```sh
+$ bitbake microblx-dev
+```
+
+or the bleeding edge (AUTOREV) version on dev:
 
 ```sh
 $ bitbake microblx-latest
