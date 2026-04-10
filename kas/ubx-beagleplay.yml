@@ -10,12 +10,12 @@ local_conf_header:
 
     # not supported
     PACKAGECONFIG:remove:pn-microblx = " USE_LFDS_611"
-    PACKAGECONFIG:remove:pn-microblx-dev = " USE_LFDS_611"
+    PACKAGECONFIG:remove:pn-microblx-devel = " USE_LFDS_611"
     PACKAGECONFIG:remove:pn-microblx-latest = " USE_LFDS_611"
 
     # use hw timestamps
     PACKAGECONFIG:pn-microblx = "USE_TIMESRC_CNTVCT"
-    PACKAGECONFIG:pn-microblx-dev = "USE_TIMESRC_CNTVCT"
+    PACKAGECONFIG:pn-microblx-devel = "USE_TIMESRC_CNTVCT"
     PACKAGECONFIG:pn-microblx-latest = "USE_TIMESRC_CNTVCT"
 
 repos:

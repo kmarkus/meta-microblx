@@ -49,9 +49,10 @@ Just run
 $ bitbake microblx
 ```
 
-or the latest `dev` version
+or the latest development `devel` version
+
 ```sh
-$ bitbake microblx-dev
+$ bitbake microblx-devel
 ```
 
 or the bleeding edge (AUTOREV) version on dev:
