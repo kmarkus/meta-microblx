@@ -14,9 +14,9 @@ local_conf_header:
     PACKAGECONFIG:remove:pn-microblx-latest = " USE_LFDS_611"
 
     # use hw timestamps
-    PACKAGECONFIG:pn-microblx = "USE_TIMESRC_CNTVCT"
-    PACKAGECONFIG:pn-microblx-devel = "USE_TIMESRC_CNTVCT"
-    PACKAGECONFIG:pn-microblx-latest = "USE_TIMESRC_CNTVCT"
+    PACKAGECONFIG:append:pn-microblx = " USE_TIMESRC_CNTVCT"
+    PACKAGECONFIG:append:pn-microblx-devel = " USE_TIMESRC_CNTVCT"
+    PACKAGECONFIG:append:pn-microblx-latest = " USE_TIMESRC_CNTVCT"
 
 repos:
   meta/meta-microblx:
