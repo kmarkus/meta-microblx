@@ -21,7 +21,7 @@ local_conf_header:
 repos:
   meta/meta-microblx:
     url: "git@github.com:kmarkus/meta-microblx"
-    refspec: "master"
+    refspec: "dev"
 
   meta/poky:
     url: "git://git.yoctoproject.org/poky"
