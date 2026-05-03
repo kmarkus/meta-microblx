@@ -30,6 +30,7 @@ FILES:${PN} += "${libdir}/ubx/*"
 # docs
 FILES:${PN}-doc += " \
 	${datadir}/ubx/examples/* \
+	${datadir}/ubx/lsdb-intf.d/lsdb_intf_test_plugin.lua \
 	"
 
 # dev files
