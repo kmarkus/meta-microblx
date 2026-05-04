@@ -1,5 +1,8 @@
 DEPENDS = "luajit luajit-native uthash cproto-native"
 RDEPENDS:${PN} += "luajit uutils"
+RDEPENDS:${PN}-test += "${PN}"
+
+PACKAGES =+ "${PN}-test"
 
 S = "${WORKDIR}/git"
 
@@ -32,6 +35,11 @@ FILES:${PN} += "${libdir}/ubx/*"
 FILES:${PN}-doc += " \
 	${datadir}/ubx/examples/* \
 	${datadir}/ubx/lsdb-intf.d/lsdb_intf_test_plugin.lua \
+	"
+
+# tests
+FILES:${PN}-test = " \
+	${datadir}/ubx/tests/* \
 	"
 
 # dev files
