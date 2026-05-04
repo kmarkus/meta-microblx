@@ -6,12 +6,12 @@ target: core-image-minimal
 local_conf_header:
   bbb: |
     MACHINE = "beaglebone-yocto"
-    CORE_IMAGE_EXTRA_INSTALL:append = " microblx-latest microblx-latest-doc"
+    CORE_IMAGE_EXTRA_INSTALL:append = " microblx-latest microblx-latest-dbg microblx-latest-doc"
 
 repos:
   meta/meta-microblx:
     url: "git@github.com:kmarkus/meta-microblx"
-    refspec: "master"
+    refspec: "dev"
 
   meta/poky:
     url: "git://git.yoctoproject.org/poky"
