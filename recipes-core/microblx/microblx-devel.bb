@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/kmarkus/microblx"
 RDEPENDS:${PN} += "ffi-reflect"
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "dfe13d45ae77c0e4f162c7b16b0151b0e046d7f5"
+SRCREV = "3d4e6b3a010baa4903e5a7f76fb355c21ce7729f"
 BRANCH = "dev"
 SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};protocol=https"
 
