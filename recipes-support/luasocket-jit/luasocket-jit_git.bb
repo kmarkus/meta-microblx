@@ -14,14 +14,18 @@ S = "${WORKDIR}/git"
 
 FILES:${PN} = "${libdir}/lua/5.1 ${datadir}/lua/5.1"
 
-EXTRA_OEMAKE = 'DESTDIR=${D} BASELIB=${base_libdir} PREFIX=/usr CC="${CC}" LD="${CC}" CFLAGS="${CFLAGS}" MYLDFLAGS="${LDFLAGS}"'
+# Pass our flags through MYCFLAGS/MYLDFLAGS (the makefile's documented hooks:
+# CFLAGS=$(MYCFLAGS) $(CFLAGS_$(PLAT))). Overriding CFLAGS directly would clobber
+# the makefile's per-platform flags -- notably -fpic -- and the .o files would
+# then fail to link into the shared .so on ARM (R_ARM_MOVW_ABS_NC ... -fPIC).
+EXTRA_OEMAKE = 'DESTDIR=${D} BASELIB=${base_libdir} PREFIX=/usr CC="${CC}" LD="${CC}" MYCFLAGS="${CFLAGS}" MYLDFLAGS="${LDFLAGS}"'
 
 inherit pkgconfig
 
 do_configure[noexec] = "1"
 
 do_compile () {
-   oe_runmake linux LUAV=5.1 CFLAGS="${CFLAGS} `pkg-config --cflags luajit`" MYLDFLAGS="${LDFLAGS} `pkg-config --libs luajit`"
+   oe_runmake linux LUAV=5.1 MYCFLAGS="${CFLAGS} `pkg-config --cflags luajit`" MYLDFLAGS="${LDFLAGS} `pkg-config --libs luajit`"
 }
 
 do_install () {
