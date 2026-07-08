@@ -1,8 +1,12 @@
 DEPENDS = "luajit luajit-native uthash cproto-native"
-RDEPENDS:${PN} += "luajit uutils"
+RDEPENDS:${PN} += "luajit uutils ${PN}-ffi-headers"
 RDEPENDS:${PN}-test += "${PN}"
 
-PACKAGES =+ "${PN}-test"
+# ${PN}-ffi-headers is prepended so it is populated *before* ${PN}-dev:
+# it opts-in exactly the headers required at runtime, everything else
+# under ${includedir} falls to ${PN}-dev by default (see below)
+PACKAGES =+ "${PN}-test ${PN}-ffi-headers"
+ALLOW_EMPTY:${PN}-ffi-headers = "1"
 
 S = "${WORKDIR}/git"
 
@@ -19,11 +23,23 @@ inherit cmake pkgconfig
 # for profiling
 # EXTRA_OECMAKE += "-DCMAKE_C_FLAGS=-pg -DCMAKE_CXX_FLAGS=-pg"
 
-# libs, headers and lua modules
+# the LuaJIT FFI bindings read these headers at *runtime* to build the
+# ffi cdefs and hard-fail without them (see ubx_ffi_headers in
+# lua/ubx.lua). Keep this list in sync with ubx.lua. Any header NOT
+# listed here defaults to ${PN}-dev and stays off the target image.
+FILES:${PN}-ffi-headers = " \
+	${includedir}/ubx/ubx_uthash_ffi.h \
+	${includedir}/ubx/ubx_types.h \
+	${includedir}/ubx/ubx_core.h \
+	${includedir}/ubx/ubx_time.h \
+	${includedir}/ubx/md5.h \
+	${includedir}/ubx/ubx_utils.h \
+	"
+
+# libs and lua modules
 FILES:${PN} += " \
 	${libdir}/libubx.so.* \
 	${libdir}/librtlog_client.so.* \
-	${includedir}/ubx/* \
 	${datadir}/lua/* \
 	${datadir}/ubx/blocks/* \
 	${bindir}/* \
@@ -43,7 +59,9 @@ FILES:${PN}-test = " \
 	${datadir}/ubx/tests/* \
 	"
 
-# dev files
+# dev files. ${includedir} catches ALL headers not already claimed by
+# ${PN}-ffi-headers (populated first), so new headers land here by
+# default rather than on the target image.
 FILES:${PN}-dev = " \
 	${libdir}/libubx.so \
 	${libdir}/liblfq.so \
@@ -51,4 +69,5 @@ FILES:${PN}-dev = " \
 	${libdir}/*.la \
 	${libdir}/pkgconfig/ubx0.pc \
 	${libdir}/pkgconfig/ubxrtl0.pc \
+	${includedir} \
 	"
