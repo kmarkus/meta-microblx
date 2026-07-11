@@ -18,7 +18,13 @@ PACKAGECONFIG[BLOCK_LSDB_INTF] = "-DBLOCK_LSDB_INTF=1,-DBLOCK_LSDB_INTF=0,,luaji
 PACKAGECONFIG[BLOCK_WEBGRAPH] = "-DBLOCK_WEBGRAPH=1,-DBLOCK_WEBGRAPH=0,,luasocket-jit lua-json"
 PACKAGECONFIG[UBX_LOG_DAEMON] = ",,libdaemon,libdaemon"
 
-inherit cmake pkgconfig
+inherit cmake pkgconfig ptest
+
+# the lua unit tests (packaged in ${PN}-test) run as ptests, one
+# interpreter and dbus session per test file (see files/run-ptest).
+# Needs 'ptest' in DISTRO_FEATURES.
+SRC_URI += "file://run-ptest"
+RDEPENDS:${PN}-ptest += "${PN}-test luaunit dbus"
 
 # for profiling
 # EXTRA_OECMAKE += "-DCMAKE_C_FLAGS=-pg -DCMAKE_CXX_FLAGS=-pg"

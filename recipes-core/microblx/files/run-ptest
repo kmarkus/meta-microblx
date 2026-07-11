@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# run the microblx lua unit tests (packaged in ${PN}-test) as ptests.
+#
+# Each test file runs in its own interpreter, so a crashing test
+# cannot take down the remaining ones, and in its own dbus session,
+# which test_lsdb_intf requires (without a session bus it errors and
+# eventually segfaults).
+
+cd /usr/share/ubx || { echo "FAIL: microblx (no /usr/share/ubx)"; exit 1; }
+
+log=$(mktemp)
+
+for f in tests/test_*.lua; do
+	t=$(basename "$f" .lua)
+
+	if dbus-run-session --config-file tests/dbus-test.conf -- \
+		luajit "$f" > "$log" 2>&1; then
+		echo "PASS: $t"
+	else
+		echo "FAIL: $t"
+		sed 's/^/# /' "$log"
+	fi
+done
+
+rm -f "$log"
