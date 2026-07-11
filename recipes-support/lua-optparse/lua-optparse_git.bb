@@ -10,6 +10,9 @@ SRCREV = "e1bdaeb7b8b05f6dd0c9604abd5fdee02ef074a0"
 
 S = "${WORKDIR}/git"
 
+# upstream Makefile has no clean target
+CLEANBROKEN = "1"
+
 LUA_MODULE_DIR = "${datadir}/lua"
 
 FILES:${PN} += "${LUA_MODULE_DIR}/5.*/"
