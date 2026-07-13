@@ -57,12 +57,14 @@ FILES:${PN} += "${libdir}/ubx/*"
 # docs
 FILES:${PN}-doc += " \
 	${datadir}/ubx/examples/* \
-	${datadir}/ubx/lsdb-intf.d/lsdb_intf_test_plugin.lua \
 	"
 
-# tests
+# tests. The lsdb-intf test plugin is a fixture required by
+# test_lsdb_intf (test_load_plugin_from_stddir loads it from the
+# standard plugin dir).
 FILES:${PN}-test = " \
 	${datadir}/ubx/tests/* \
+	${datadir}/ubx/lsdb-intf.d/lsdb_intf_test_plugin.lua \
 	"
 
 # dev files. ${includedir} catches ALL headers not already claimed by
