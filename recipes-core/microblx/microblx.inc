@@ -18,6 +18,13 @@ PACKAGECONFIG[BLOCK_LSDB_INTF] = "-DBLOCK_LSDB_INTF=1,-DBLOCK_LSDB_INTF=0,,luaji
 PACKAGECONFIG[BLOCK_WEBGRAPH] = "-DBLOCK_WEBGRAPH=1,-DBLOCK_WEBGRAPH=0,,luasocket-jit lua-json"
 PACKAGECONFIG[UBX_LOG_DAEMON] = ",,libdaemon,libdaemon"
 
+# tracing backends (see "Tracing" in the microblx README). Mutually
+# exclusive; with neither set the cmake default TRACING=OFF applies
+# and all trace macros compile to nothing. sys/sdt.h is provided by
+# systemtap's dev package.
+PACKAGECONFIG[TRACING_SDT] = "-DTRACING=SDT,,systemtap"
+PACKAGECONFIG[TRACING_MARKER] = "-DTRACING=MARKER,,"
+
 inherit cmake pkgconfig ptest
 
 # the lua unit tests (packaged in ${PN}-test) run as ptests, one
