@@ -1,62 +1,90 @@
 meta-microblx: bitbake layer for the microblx framework
 =======================================================
 
+This layer provides recipes for the [microblx](https://github.com/kmarkus/microblx)
+real-time function block framework and its runtime dependencies
+(LuaJIT modules, liblfds, ...).
+
 Dependencies
 ------------
 
-This layer depends on:
-
-  URI: http://git.yoctoproject.org/cgit/cgit.cgi/poky
-  branch: rocko or later
+  URI: git://git.yoctoproject.org/poky
+  branch: scarthgap (tested; layer compat reaches back to dunfell)
 
   URI: git://git.openembedded.org/meta-openembedded
-  layers: meta
-  branch: rocko or later
+  layers: meta-oe
+  branch: scarthgap
 
+Adding the layer to your build
+------------------------------
 
-Patches
+Add the layer path to `BBLAYERS` in `bblayers.conf` as usual, or use
+one of the kas configurations shipped in `kas/`:
+
+```sh
+$ kas build meta/meta-microblx/kas/ubx-bbb.yml         # BeagleBone Black
+$ kas build meta/meta-microblx/kas/ubx-beagleplay.yml  # BeaglePlay
+```
+
+Recipes
 -------
 
-Please submit any patches against the microblx layer via the github
-issue tracker https://github.com/kmarkus/meta-microblx.
+microblx comes in three flavors (all share `microblx.inc`):
 
-
-Adding the microblx layer to your build
----------------------------------------
-
-In order to use this layer, you need to make the build system aware of
-it.
-
-Assuming the microblx layer exists at the top-level of your yocto
-build tree, you can add it to the build system by adding the location
-of the microblx layer to bblayers.conf, along with any other layers
-needed. e.g.:
-
-  BBLAYERS ?= " \
-    /path/to/yocto/meta \
-    /path/to/yocto/meta-poky \
-    /path/to/yocto/meta-yocto-bsp \
-    /path/to/yocto/meta-microblx \
-    /path/to/yocto/meta-openembedded/meta-oe \
-    "
-
-Building
---------
-
-Just run
-
-```sh
-$ bitbake microblx
-```
-
-or the latest development `devel` version
-
-```sh
-$ bitbake microblx-devel
-```
-
-or the bleeding edge (AUTOREV) version on dev:
+- `microblx` -- latest release (0.9.2, `master`)
+- `microblx-devel` -- pinned snapshot of the `dev` branch
+- `microblx-latest` -- AUTOREV tip of the `dev` branch
 
 ```sh
 $ bitbake microblx-latest
 ```
+
+Further recipes:
+
+- `microblx-build-tools` -- `ubx-tocarr` build helper
+  (`BBCLASSEXTEND` native/nativesdk), needed when building external
+  block projects
+- `recipes-support/` -- runtime dependencies: `uutils`, `liblfds`
+  (6.1.1), `luasocket-jit`, `lua-json`, `lua-compat53`,
+  `lua-optparse`, `lua-lsdbus`/`luajit-lsdbus`, `ffi-reflect`,
+  `cproto-native`
+- `recipes-devtools/luaunit` -- Lua unit testing framework (used by
+  the ptests)
+
+PACKAGECONFIG options
+---------------------
+
+Set via e.g. `PACKAGECONFIG:pn-microblx-latest += "..."`:
+
+| Option             | Default | Description                                                                                  |
+|--------------------|---------|----------------------------------------------------------------------------------------------|
+| `USE_LFDS_611`     | on      | build the legacy `lfds_cyclic` iblock against liblfds 6.1.1 (deprecated, prefer `lfrb`)       |
+| `BLOCK_WEBGRAPH`   | on      | webgraph visualization block (rdepends: `luasocket-jit`, `lua-json`)                          |
+| `UBX_LOG_DAEMON`   | on      | build `ubx-log` with daemonization support (libdaemon, auto-detected by cmake)                |
+| `BLOCK_LSDB_INTF`  | off     | D-Bus introspection/control block (rdepends: `luajit-lsdbus`, `lua-optparse`)                 |
+| `USE_TIMESRC_TSC`  | off     | use the x86 TSC as timesource                                                                 |
+| `USE_TIMESRC_CNTVCT` | off   | use the ARM generic counter (CNTVCT) as timesource                                            |
+| `TRACING_SDT`      | off     | compile in USDT/SDT trace probes (build dep: `systemtap` for `sys/sdt.h`; no runtime deps)    |
+| `TRACING_MARKER`   | off     | compile in ftrace `trace_marker` tracing                                                      |
+
+`TRACING_SDT` and `TRACING_MARKER` are mutually exclusive; with
+neither set, tracing is compiled out entirely (cmake `TRACING=OFF`).
+See the "Tracing" section in the microblx README for usage.
+
+Packaging notes
+---------------
+
+- `${PN}-ffi-headers` contains the small set of headers the LuaJIT
+  FFI bindings parse at *runtime* (see `ubx_ffi_headers` in
+  `lua/ubx.lua`); it is an install-time requirement of `${PN}`. All
+  other headers go to `${PN}-dev` as usual.
+- Examples are packaged in `${PN}-doc`, the Lua tests in `${PN}-test`.
+- The Lua tests can be run on target as ptests: add `ptest` to
+  `DISTRO_FEATURES`, install `ptest-runner` and `${PN}-ptest`, then
+  run e.g. `ptest-runner microblx-latest`.
+
+Patches
+-------
+
+Please submit patches via the github issue tracker
+https://github.com/kmarkus/meta-microblx.
