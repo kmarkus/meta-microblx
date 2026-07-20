@@ -25,7 +25,9 @@ inherit pkgconfig
 do_configure[noexec] = "1"
 
 do_compile () {
-   oe_runmake linux LUAV=5.1 MYCFLAGS="${CFLAGS} `pkg-config --cflags luajit`" MYLDFLAGS="${LDFLAGS} `pkg-config --libs luajit`"
+   # LUAINC_linux: don't let the makefile default to host /usr/include lua
+   # paths (poison-system-directories is a hard error since walnascar)
+   oe_runmake linux LUAV=5.1 LUAINC_linux="${STAGING_INCDIR}/luajit-2.1" MYCFLAGS="${CFLAGS} `pkg-config --cflags luajit`" MYLDFLAGS="${LDFLAGS} `pkg-config --libs luajit`"
 }
 
 do_install () {
