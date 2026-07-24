@@ -15,7 +15,6 @@ SRC_URI = "git://liblfds.org/git/liblfds6.1.1;branch=master;protocol=https \
 	file://0004-Add-bootstrap-file.patch \
 	file://0005-add-pkg-config-support.patch"
 
-S = "${WORKDIR}/git"
 B = "${S}/liblfds611"
 
 inherit autotools

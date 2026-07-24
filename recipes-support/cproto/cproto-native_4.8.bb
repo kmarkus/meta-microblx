@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4175b2965868e5f090026b0ef85b29ea"
 SRC_URI = "https://invisible-mirror.net/archives/cproto/cproto-${PV}.tgz"
 SRC_URI[sha256sum] = "0cccb93447682c7fdb4f0bdbfbe05d52a827331e0a19a5215d2c3cb85ad29258"
 
-S = "${WORKDIR}/${BPN}-${PV}"
+S = "${UNPACKDIR}/${BPN}-${PV}"
 
 DEPENDS = "flex-native bison-native"
 

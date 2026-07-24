@@ -8,7 +8,6 @@ PV = "+git${SRCPV}"
 SRC_URI = "git://github.com/rxi/json.lua.git;protocol=https;branch=master"
 SRCREV = "dbf4b2dd2eb7c23be2773c89eb059dadd6436f94"
 
-S = "${WORKDIR}/git"
 
 LUA_MODULE_DIR = "${datadir}/lua"
 

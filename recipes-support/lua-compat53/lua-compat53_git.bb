@@ -9,7 +9,6 @@ SRCREV = "9c6f75a88db1462ff655dc006588b25d3bc2a5be"
 
 SRC_URI = "git://github.com/keplerproject/lua-compat-5.3.git;protocol=https;branch=${BRANCH}"
 
-S = "${WORKDIR}/git"
 
 FILES:${PN} += "\
     ${datadir}/lua/5.*/compat53/init.lua \

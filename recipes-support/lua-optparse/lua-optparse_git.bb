@@ -8,7 +8,6 @@ PV = "+git${SRCPV}"
 SRC_URI = "git://github.com/gvvaughan/optparse.git;protocol=https;branch=master"
 SRCREV = "e1bdaeb7b8b05f6dd0c9604abd5fdee02ef074a0"
 
-S = "${WORKDIR}/git"
 
 # upstream Makefile has no clean target
 CLEANBROKEN = "1"

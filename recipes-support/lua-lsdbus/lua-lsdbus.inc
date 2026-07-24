@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/kmarkus/lsdbus.git;protocol=https;branch=${BRANCH}"
 
 SRCREV = "1137c20488538199095aaad53821366efc79824f"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

@@ -9,7 +9,6 @@ SRCREV = "13810202859e4f2e8122dfd2bc46696c2d76dcd8"
 
 SRC_URI = "git://github.com/kmarkus/uutils.git;protocol=https;branch=${BRANCH}"
 
-S = "${WORKDIR}/git"
 
 LUA_MODULE_DIR = "${datadir}/lua"
 

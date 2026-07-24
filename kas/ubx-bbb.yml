@@ -1,38 +1,68 @@
+# ubx-bbb.yml -- OFFICIAL microblx demo for the BeagleBone Black, wrynose.
+#
+# Demonstrates the full set of microblx PACKAGECONFIG features applicable to
+# the BBB (armv7 Cortex-A8). Release shape: post-walnascar the combined "poky"
+# repo is retired (its master is a stub), so the core is assembled from
+# separate repos -- openembedded-core (-> meta), bitbake, meta-yocto
+# (-> meta-poky/-bsp). This is the 'wrynose' branch; other Yocto releases live
+# on their own branches of this layer.
 header:
-  version: 10
+  version: 14
 
 target: core-image-minimal
 
 local_conf_header:
   bbb: |
     MACHINE = "beaglebone-yocto"
+    DISTRO = "poky"
+
     CORE_IMAGE_EXTRA_INSTALL:append = " microblx-latest microblx-latest-dbg microblx-latest-doc"
 
-    PACKAGECONFIG:pn-microblx-latest += "BLOCK_LSDB_INTF BLOCK_WEBGRAPH"
-    PACKAGECONFIG:pn-microblx-devel += "BLOCK_LSDB_INTF BLOCK_WEBGRAPH"
+    # Demo the full applicable microblx feature set. The recipe default already
+    # enables USE_LFDS_611 (lock-free cyclic block), BLOCK_WEBGRAPH and
+    # UBX_LOG_DAEMON; add the lsdbus interface block and SDT/USDT probe tracing.
+    # The remaining PACKAGECONFIGs don't apply to this target:
+    #   USE_TIMESRC_TSC    -- x86 only
+    #   USE_TIMESRC_CNTVCT -- needs the ARM generic timer; Cortex-A8 has none
+    #   TRACING_MARKER     -- mutually exclusive with TRACING_SDT
+    PACKAGECONFIG:pn-microblx-latest += "BLOCK_LSDB_INTF BLOCK_WEBGRAPH TRACING_SDT"
+    PACKAGECONFIG:pn-microblx-devel  += "BLOCK_LSDB_INTF BLOCK_WEBGRAPH TRACING_SDT"
 
     # run the microblx lua tests as ptests ('ptest-runner microblx-latest').
-    # Only these are installed, deliberately not IMAGE_FEATURES
-    # 'ptest-pkgs', which would pull in every ptest package.
+    # Only these are installed, deliberately not IMAGE_FEATURES 'ptest-pkgs',
+    # which would pull in every ptest package.
     DISTRO_FEATURES:append = " ptest"
     CORE_IMAGE_EXTRA_INSTALL:append = " ptest-runner microblx-latest-ptest"
 
 repos:
+  # this layer (contains this kas file); wrynose branch
   meta/meta-microblx:
     url: "git@github.com:kmarkus/meta-microblx"
-    refspec: "dev"
+    refspec: "wrynose"
 
-  meta/poky:
-    url: "git://git.yoctoproject.org/poky"
-    refspec: "scarthgap"
+  # --- core: separate repos replacing the retired poky combo ---
+  meta/oe-core:
+    url: "https://git.openembedded.org/openembedded-core"
+    refspec: "wrynose"
     layers:
       meta:
+  meta/bitbake:
+    url: "https://git.openembedded.org/bitbake"
+    refspec: "2.18"
+    # bitbake is the build tool, not a layer -- disable the default root layer
+    layers:
+      "": disabled
+  meta/meta-yocto:
+    url: "https://git.yoctoproject.org/git/meta-yocto"
+    refspec: "wrynose"
+    layers:
       meta-poky:
       meta-yocto-bsp:
 
+  # --- shared OE layers ---
   meta/meta-openembedded:
-    url: "git://git.openembedded.org/meta-openembedded"
-    refspec: "scarthgap"
+    url: "https://git.openembedded.org/meta-openembedded"
+    refspec: "wrynose"
     layers:
       meta-oe:
       meta-webserver:

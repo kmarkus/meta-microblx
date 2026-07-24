@@ -12,7 +12,6 @@ TAG = "v${PV}"
 BRANCH = "master"
 SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};tag=${TAG};protocol=https"
 
-S = "${WORKDIR}/git"
 
 do_install () {
 	   install -d ${D}${bindir}

@@ -9,7 +9,6 @@ SRC_URI = "git://github.com/corsix/ffi-reflect.git;branch=master;protocol=https"
 SRCREV = "d9923b00d128ba27e7c85b02d979af6d25876ff7"
 PV = "1.0+git${SRCPV}"
 
-S = "${WORKDIR}/git"
 
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"

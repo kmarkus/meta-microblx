@@ -10,7 +10,6 @@ SRC_URI = "git://github.com/lunarmodules/luasocket;protocol=https;branch=master"
 PV = "+git${SRCPV}"
 SRCREV = "fa69770e52ba869feb8339d49e7c3c536953fbde"
 
-S = "${WORKDIR}/git"
 
 FILES:${PN} = "${libdir}/lua/5.1 ${datadir}/lua/5.1"
 
