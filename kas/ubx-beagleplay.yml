@@ -1,55 +1,85 @@
+# ubx-beagleplay.yml -- OFFICIAL microblx demo for the BeaglePlay, wrynose.
+#
+# BeaglePlay = TI AM62 (aarch64, Cortex-A53). Demonstrates the full set of
+# microblx PACKAGECONFIG features applicable to this target. Release shape as
+# ubx-bbb.yml: post-walnascar the combined "poky" repo is retired, so the core
+# is assembled from separate repos -- openembedded-core (-> meta), bitbake,
+# meta-yocto (-> meta-poky/-bsp). The BeaglePlay BSP adds meta-ti + meta-arm.
+# This is the 'wrynose' branch; other Yocto releases live on their own branches.
 header:
-  version: 10
+  version: 14
 
 target: core-image-minimal
 
 local_conf_header:
   beagleplay: |
     MACHINE = "beagleplay"
-    CORE_IMAGE_EXTRA_INSTALL:append = " microblx-latest microblx-latest-doc"
+    DISTRO = "poky"
 
-    # not supported
-    PACKAGECONFIG:remove:pn-microblx = " USE_LFDS_611"
-    PACKAGECONFIG:remove:pn-microblx-devel = " USE_LFDS_611"
+    CORE_IMAGE_EXTRA_INSTALL:append = " microblx-latest microblx-latest-dbg microblx-latest-doc"
+
+    # Demo the full applicable microblx feature set. The recipe default already
+    # enables BLOCK_WEBGRAPH and UBX_LOG_DAEMON; add the lsdbus interface block,
+    # SDT/USDT probe tracing, and -- unlike the BBB's Cortex-A8 -- hardware
+    # timestamps from the ARM generic timer (USE_TIMESRC_CNTVCT).
+    #   USE_LFDS_611    -- liblfds 6.1.1 is not supported on aarch64; drop it
+    #   USE_TIMESRC_TSC -- x86 only
+    #   TRACING_MARKER  -- mutually exclusive with TRACING_SDT
     PACKAGECONFIG:remove:pn-microblx-latest = " USE_LFDS_611"
+    PACKAGECONFIG:remove:pn-microblx-devel  = " USE_LFDS_611"
+    PACKAGECONFIG:pn-microblx-latest += "BLOCK_LSDB_INTF BLOCK_WEBGRAPH TRACING_SDT USE_TIMESRC_CNTVCT"
+    PACKAGECONFIG:pn-microblx-devel  += "BLOCK_LSDB_INTF BLOCK_WEBGRAPH TRACING_SDT USE_TIMESRC_CNTVCT"
 
-    # use hw timestamps
-    PACKAGECONFIG:append:pn-microblx = " USE_TIMESRC_CNTVCT"
-    PACKAGECONFIG:append:pn-microblx-devel = " USE_TIMESRC_CNTVCT"
-    PACKAGECONFIG:append:pn-microblx-latest = " USE_TIMESRC_CNTVCT"
+    # run the microblx lua tests as ptests ('ptest-runner microblx-latest').
+    # Only these are installed, deliberately not IMAGE_FEATURES 'ptest-pkgs',
+    # which would pull in every ptest package.
+    DISTRO_FEATURES:append = " ptest"
+    CORE_IMAGE_EXTRA_INSTALL:append = " ptest-runner microblx-latest-ptest"
 
 repos:
+  # this layer (contains this kas file); wrynose branch
   meta/meta-microblx:
     url: "git@github.com:kmarkus/meta-microblx"
-    refspec: "dev"
+    refspec: "wrynose"
 
-  meta/poky:
-    url: "git://git.yoctoproject.org/poky"
-    refspec: "scarthgap"
+  # --- core: separate repos replacing the retired poky combo ---
+  meta/oe-core:
+    url: "https://git.openembedded.org/openembedded-core"
+    refspec: "wrynose"
     layers:
       meta:
+  meta/bitbake:
+    url: "https://git.openembedded.org/bitbake"
+    refspec: "2.18"
+    # bitbake is the build tool, not a layer -- disable the default root layer
+    layers:
+      "": disabled
+  meta/meta-yocto:
+    url: "https://git.yoctoproject.org/git/meta-yocto"
+    refspec: "wrynose"
+    layers:
       meta-poky:
       meta-yocto-bsp:
 
+  # --- shared OE layers ---
   meta/meta-openembedded:
-    url: "git://git.openembedded.org/meta-openembedded"
-    refspec: "scarthgap"
+    url: "https://git.openembedded.org/meta-openembedded"
+    refspec: "wrynose"
     layers:
       meta-oe:
       meta-webserver:
 
-  # beagleplay stuff
+  # --- BeaglePlay BSP (AM62 / K3) ---
   meta/meta-ti:
-    url: "git://git.yoctoproject.org/meta-ti"
-    refspec: "scarthgap"
+    url: "https://git.yoctoproject.org/git/meta-ti"
+    refspec: "wrynose"
     layers:
       meta-ti-bsp:
       meta-beagle:
       meta-ti-extras:
-
   meta/meta-arm:
-    url: "git://git.yoctoproject.org/meta-arm"
-    refspec: "scarthgap"
+    url: "https://git.yoctoproject.org/git/meta-arm"
+    refspec: "wrynose"
     layers:
       meta-arm:
       meta-arm-toolchain:
