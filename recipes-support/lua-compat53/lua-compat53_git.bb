@@ -12,7 +12,8 @@ SRC_URI = "git://github.com/keplerproject/lua-compat-5.3.git;protocol=https;bran
 
 FILES:${PN} += "\
     ${datadir}/lua/5.*/compat53/init.lua \
-    ${datadir}/lua/5.*/compat53/module.lua"
+    ${datadir}/lua/5.*/compat53/module.lua \
+    ${datadir}/lua/5.*/compat53/file_mt.lua"
 
 FILES:${PN}-dev += "\
     ${includedir}/lua5.1/compat-5.3.h \
@@ -32,6 +33,9 @@ do_install () {
     install -d ${D}${datadir}/lua/5.1/compat53
     install -m 0644 ${S}/compat53/init.lua ${D}${datadir}/lua/5.1/compat53/
     install -m 0644 ${S}/compat53/module.lua ${D}${datadir}/lua/5.1/compat53/
+    # init.lua conditionally require()s compat53.file_mt (io file metatable
+    # compat); without it lsdbus/ubx-dbus fail at load time
+    install -m 0644 ${S}/compat53/file_mt.lua ${D}${datadir}/lua/5.1/compat53/
 
     # 5.2
     install -d ${D}${includedir}/lua5.2
@@ -41,4 +45,5 @@ do_install () {
     install -d ${D}${datadir}/lua/5.2/compat53
     ln -srf ${D}${datadir}/lua/5.1/compat53/init.lua ${D}${datadir}/lua/5.2/compat53/
     ln -srf ${D}${datadir}/lua/5.1/compat53/module.lua ${D}${datadir}/lua/5.2/compat53/
+    ln -srf ${D}${datadir}/lua/5.1/compat53/file_mt.lua ${D}${datadir}/lua/5.2/compat53/
 }
