@@ -9,11 +9,28 @@ Dependencies
 ------------
 
   URI: git://git.yoctoproject.org/poky
-  branch: scarthgap (tested; layer compat reaches back to dunfell)
+  branch: wrynose (tested; layer compat: walnascar and newer)
 
   URI: git://git.openembedded.org/meta-openembedded
   layers: meta-oe
-  branch: scarthgap
+  branch: wrynose
+
+Branches
+--------
+
+Stable branches are named after the Yocto LTS releases they target;
+check out the newest branch whose release is <= your Yocto/OE version.
+
+- `master`     -- latest unstable / bleeding edge.
+- `wrynose`    -- current stable (this branch); post-`UNPACKDIR`
+                  recipe layout.
+- `scarthgap`  -- previous LTS; pre-`UNPACKDIR` layout (git recipes
+                  set `S = "${WORKDIR}/git"`).
+- `mickledore-or-older`, `zeus-and-older` -- frozen historical
+                  snapshots (the tail of the same chain).
+
+The `UNPACKDIR` migration is a hard break: the `wrynose` recipes do not
+build on scarthgap, and vice versa, hence the split.
 
 Adding the layer to your build
 ------------------------------
