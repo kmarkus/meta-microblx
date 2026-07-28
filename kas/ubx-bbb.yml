@@ -19,12 +19,15 @@ local_conf_header:
     CORE_IMAGE_EXTRA_INSTALL:append = " microblx-latest microblx-latest-dbg microblx-latest-doc"
 
     # Demo the full applicable microblx feature set. The recipe default already
-    # enables USE_LFDS_611 (lock-free cyclic block), BLOCK_WEBGRAPH and
-    # UBX_LOG_DAEMON; add the lsdbus interface block and SDT/USDT probe tracing.
+    # enables BLOCK_WEBGRAPH and UBX_LOG_DAEMON; add the lsdbus interface block
+    # and SDT/USDT probe tracing, and drop USE_LFDS_611 -- the lfds_cyclic block
+    # it builds is deprecated, use lfrb instead.
     # The remaining PACKAGECONFIGs don't apply to this target:
     #   USE_TIMESRC_TSC    -- x86 only
     #   USE_TIMESRC_CNTVCT -- needs the ARM generic timer; Cortex-A8 has none
     #   TRACING_MARKER     -- mutually exclusive with TRACING_SDT
+    PACKAGECONFIG:remove:pn-microblx-latest = " USE_LFDS_611"
+    PACKAGECONFIG:remove:pn-microblx-devel  = " USE_LFDS_611"
     PACKAGECONFIG:append:pn-microblx-latest = " BLOCK_LSDB_INTF BLOCK_WEBGRAPH TRACING_SDT"
     PACKAGECONFIG:append:pn-microblx-devel  = " BLOCK_LSDB_INTF BLOCK_WEBGRAPH TRACING_SDT"
 
