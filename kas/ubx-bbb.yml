@@ -25,8 +25,8 @@ local_conf_header:
     #   USE_TIMESRC_TSC    -- x86 only
     #   USE_TIMESRC_CNTVCT -- needs the ARM generic timer; Cortex-A8 has none
     #   TRACING_MARKER     -- mutually exclusive with TRACING_SDT
-    PACKAGECONFIG:pn-microblx-latest += "BLOCK_LSDB_INTF BLOCK_WEBGRAPH TRACING_SDT"
-    PACKAGECONFIG:pn-microblx-devel  += "BLOCK_LSDB_INTF BLOCK_WEBGRAPH TRACING_SDT"
+    PACKAGECONFIG:append:pn-microblx-latest = " BLOCK_LSDB_INTF BLOCK_WEBGRAPH TRACING_SDT"
+    PACKAGECONFIG:append:pn-microblx-devel  = " BLOCK_LSDB_INTF BLOCK_WEBGRAPH TRACING_SDT"
 
     # run the microblx lua tests as ptests ('ptest-runner microblx-latest').
     # Only these are installed, deliberately not IMAGE_FEATURES 'ptest-pkgs',
