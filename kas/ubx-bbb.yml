@@ -8,8 +8,8 @@ local_conf_header:
     MACHINE = "beaglebone-yocto"
     CORE_IMAGE_EXTRA_INSTALL:append = " microblx-latest microblx-latest-dbg microblx-latest-doc"
 
-    PACKAGECONFIG:pn-microblx-latest += "BLOCK_LSDB_INTF BLOCK_WEBGRAPH"
-    PACKAGECONFIG:pn-microblx-devel += "BLOCK_LSDB_INTF BLOCK_WEBGRAPH"
+    PACKAGECONFIG:append:pn-microblx-latest = " BLOCK_LSDB_INTF BLOCK_WEBGRAPH"
+    PACKAGECONFIG:append:pn-microblx-devel  = " BLOCK_LSDB_INTF BLOCK_WEBGRAPH"
 
     # run the microblx lua tests as ptests ('ptest-runner microblx-latest').
     # Only these are installed, deliberately not IMAGE_FEATURES
