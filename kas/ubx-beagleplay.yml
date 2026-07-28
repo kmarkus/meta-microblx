@@ -27,8 +27,8 @@ local_conf_header:
     #   TRACING_MARKER  -- mutually exclusive with TRACING_SDT
     PACKAGECONFIG:remove:pn-microblx-latest = " USE_LFDS_611"
     PACKAGECONFIG:remove:pn-microblx-devel  = " USE_LFDS_611"
-    PACKAGECONFIG:pn-microblx-latest += "BLOCK_LSDB_INTF BLOCK_WEBGRAPH TRACING_SDT USE_TIMESRC_CNTVCT"
-    PACKAGECONFIG:pn-microblx-devel  += "BLOCK_LSDB_INTF BLOCK_WEBGRAPH TRACING_SDT USE_TIMESRC_CNTVCT"
+    PACKAGECONFIG:append:pn-microblx-latest = " BLOCK_LSDB_INTF BLOCK_WEBGRAPH TRACING_SDT USE_TIMESRC_CNTVCT"
+    PACKAGECONFIG:append:pn-microblx-devel  = " BLOCK_LSDB_INTF BLOCK_WEBGRAPH TRACING_SDT USE_TIMESRC_CNTVCT"
 
     # run the microblx lua tests as ptests ('ptest-runner microblx-latest').
     # Only these are installed, deliberately not IMAGE_FEATURES 'ptest-pkgs',
