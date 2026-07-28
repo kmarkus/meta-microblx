@@ -8,6 +8,8 @@ local_conf_header:
     MACHINE = "beaglebone-yocto"
     CORE_IMAGE_EXTRA_INSTALL:append = " microblx-latest microblx-latest-dbg microblx-latest-doc"
 
+    PACKAGECONFIG:remove:pn-microblx-latest = " USE_LFDS_611"
+    PACKAGECONFIG:remove:pn-microblx-devel  = " USE_LFDS_611"
     PACKAGECONFIG:append:pn-microblx-latest = " BLOCK_LSDB_INTF BLOCK_WEBGRAPH"
     PACKAGECONFIG:append:pn-microblx-devel  = " BLOCK_LSDB_INTF BLOCK_WEBGRAPH"
 
