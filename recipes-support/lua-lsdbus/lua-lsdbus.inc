@@ -4,11 +4,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 PACKAGES =+ "${PN}-tools"
 
-PV = "1.0+git${SRCPV}"
+PV = "1.0.0~rc1+git"
 BRANCH = "master"
 SRC_URI = "git://github.com/kmarkus/lsdbus.git;protocol=https;branch=${BRANCH}"
 
-SRCREV = "1137c20488538199095aaad53821366efc79824f"
+SRCREV = "97e402b70bc81aa119aa00d0c833bda02f58ac28"
 
 S = "${WORKDIR}/git"
 
@@ -19,6 +19,7 @@ FILES:${PN} += " \
 	${datadir}/lua/*/lsdbus/error.lua \
 	${datadir}/lua/*/lsdbus/expat.lua \
 	${datadir}/lua/*/lsdbus/init.lua \
+	${datadir}/lua/*/lsdbus/job.lua \
 	${datadir}/lua/*/lsdbus/proxy.lua \
 	${datadir}/lua/*/lsdbus/server.lua \
 	${libdir}/lua/*/lsdbus/core.so \
