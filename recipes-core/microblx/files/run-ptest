@@ -6,15 +6,27 @@
 # cannot take down the remaining ones, and in its own dbus session,
 # which test_lsdb_intf requires (without a session bus it errors and
 # eventually segfaults).
+#
+# tests/dbus-test.conf is the CI config and listens on the real system
+# bus socket, which the private daemon would take over and delete on
+# exit. Run it on a private socket instead and point the system bus
+# address there too, so tests using the system bus get the permissive
+# private bus as in CI.
 
 cd /usr/share/ubx || { echo "FAIL: microblx (no /usr/share/ubx)"; exit 1; }
 
 log=$(mktemp)
+tmp=$(mktemp -d)
+bus="$tmp/bus"
+
+sed "s|<listen>.*</listen>|<listen>unix:path=$bus</listen>|" \
+	tests/dbus-test.conf > "$tmp/dbus-test.conf"
+export DBUS_SYSTEM_BUS_ADDRESS="unix:path=$bus"
 
 for f in tests/test_*.lua; do
 	t=$(basename "$f" .lua)
 
-	if dbus-run-session --config-file tests/dbus-test.conf -- \
+	if dbus-run-session --config-file "$tmp/dbus-test.conf" -- \
 		luajit "$f" > "$log" 2>&1; then
 		echo "PASS: $t"
 	else
@@ -23,4 +35,4 @@ for f in tests/test_*.lua; do
 	fi
 done
 
-rm -f "$log"
+rm -rf "$log" "$tmp"
