@@ -12,7 +12,7 @@ SRCREV = "e9da2519705418e92e39d10a9355647610879902"
 
 S = "${WORKDIR}/git"
 
-inherit cmake pkgconfig
+inherit cmake pkgconfig ptest
 
 # the unit tests, runnable with luaunit from ${datadir}/${BPN}/test
 EXTRA_OECMAKE += "-DINSTALL_TESTS=ON -DCONFIG_TESTDIR=${datadir}/${BPN}/test"
@@ -32,3 +32,12 @@ FILES:${PN}-tools += " \
 
 FILES:${PN}-test = "${datadir}/${BPN}/test"
 RDEPENDS:${PN}-test += "${PN}"
+
+# the unit tests run as ptests with ${LSDBUS_LUA} in a private dbus
+# session (see files/run-ptest). Needs 'ptest' in DISTRO_FEATURES.
+SRC_URI += "file://run-ptest"
+RDEPENDS:${PN}-ptest += "${PN}-test ${LSDBUS_LUA} luaunit dbus"
+
+do_install_ptest() {
+	sed -i -e 's|@LUA@|${LSDBUS_LUA}|g' -e 's|@BPN@|${BPN}|g' ${D}${PTEST_PATH}/run-ptest
+}
