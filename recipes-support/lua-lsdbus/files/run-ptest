@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+# run the lsdbus lua unit tests (packaged in luajit-lsdbus-test) as ptests.
+#
+# All tests run in one luaunit run inside a private dbus session,
+# together with the peer test server that most of them talk to. The
+# script re-runs itself inside the session, because the tests signal
+# the server with 'pkill -f peer-testserver.lua', which would also hit
+# any 'sh -c' command line containing that name.
+
+cd /usr/share/luajit-lsdbus || { echo "FAIL: lsdbus (no /usr/share/luajit-lsdbus)"; exit 1; }
+
+if [ "$1" = "--in-session" ]; then
+	luajit test/peer-testserver.lua > /dev/null 2>&1 &
+	peer=$!
+	sleep 1
+	cd test && luajit run.lua -v
+	rc=$?
+	kill $peer
+	exit $rc
+fi
+
+log=$(mktemp)
+
+LSDBUS_BUS=user dbus-run-session -- "$0" --in-session > "$log" 2>&1
+rc=$?
+
+sed -n -e 's/^    \([^ ]*\) \.\.\. .*Ok$/PASS: \1/p' \
+       -e 's/^    \([^ ]*\) \.\.\. .*\(FAIL\|ERROR\)$/FAIL: \1/p' \
+       -e 's/^    \([^ ]*\) \.\.\. .*SKIP$/SKIP: \1/p' "$log"
+
+if [ $rc -ne 0 ]; then
+	echo "FAIL: lsdbus (luaunit exit code $rc)"
+	sed 's/^/# /' "$log"
+fi
+
+rm -f "$log"
