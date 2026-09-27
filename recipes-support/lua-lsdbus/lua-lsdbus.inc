@@ -14,13 +14,7 @@ SRCREV = "97e402b70bc81aa119aa00d0c833bda02f58ac28"
 inherit cmake pkgconfig
 
 FILES:${PN} += " \
-	${datadir}/lua/*/lsdbus/common.lua \
-	${datadir}/lua/*/lsdbus/error.lua \
-	${datadir}/lua/*/lsdbus/expat.lua \
-	${datadir}/lua/*/lsdbus/init.lua \
-	${datadir}/lua/*/lsdbus/job.lua \
-	${datadir}/lua/*/lsdbus/proxy.lua \
-	${datadir}/lua/*/lsdbus/server.lua \
+	${datadir}/lua/*/lsdbus/*.lua \
 	${libdir}/lua/*/lsdbus/core.so \
 "	
 
