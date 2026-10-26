@@ -13,3 +13,6 @@ SRC_URI = "git://github.com/kmarkus/microblx.git;branch=${BRANCH};protocol=https
 SRCREV = "66c830083461ec5e7e9d5a7f37fef53b8e1fd264"
 
 require microblx.inc
+
+# this release has no ENABLE_URCU option
+PACKAGECONFIG:remove = "ENABLE_URCU"
