@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# libcreflect ptests: unit tests, the compiler oracle check programs
+# (one per header, built for this ABI), the Lua tests and examples for
+# each Lua with the creflect module installed.
+
+cd "$(dirname "$0")" || exit 1
+log=$(mktemp)
+
+run() { # name, command...
+	n=$1
+	shift
+	if "$@" > "$log" 2>&1; then
+		echo "PASS: $n"
+	else
+		echo "FAIL: $n"
+		grep -m 20 'DIFFER\|FAIL\|rror' "$log" | sed 's/^/# /'
+	fi
+}
+
+run unit ./crefl-test
+
+for c in oracle/*-check; do
+	run "oracle-$(basename "$c" -check)" "$c"
+done
+
+for lua in luajit lua; do
+	command -v $lua > /dev/null || continue
+	$lua -e 'os.exit(package.searchpath("creflect", package.cpath) and 0 or 1)' || continue
+	(cd lua/test && run "lua-$lua" $lua run.lua)
+	for ex in lua/examples/*.lua; do
+		(cd lua/examples && run "lua-$lua-example-$(basename "$ex" .lua)" $lua "$(basename "$ex")")
+	done
+done
+
+rm -f "$log"
