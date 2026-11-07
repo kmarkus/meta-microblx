@@ -1,4 +1,4 @@
-DEPENDS = "luajit luajit-native uthash cproto-native"
+DEPENDS = "luajit luajit-native uthash cproto-native cmocka"
 RDEPENDS:${PN} += "luajit uutils ${PN}-ffi-headers"
 RDEPENDS:${PN}-test += "${PN}"
 
