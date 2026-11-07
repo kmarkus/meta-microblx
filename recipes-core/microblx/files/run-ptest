@@ -35,4 +35,9 @@ for f in tests/test_*.lua; do
 	fi
 done
 
+# the C tests (liblfq, liblfb, rtlog), if this version has them
+if [ -x tests/run_c_tests.sh ]; then
+	tests/run_c_tests.sh
+fi
+
 rm -rf "$log" "$tmp"
