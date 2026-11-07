@@ -61,7 +61,8 @@ Further recipes:
   (`BBCLASSEXTEND` native/nativesdk), needed when building external
   block projects
 - `recipes-support/` -- runtime dependencies: `uutils`, `liblfds`
-  (6.1.1), `luasocket-jit`, `lua-json`, `lua-compat53`,
+  (6.1.1, only for the 0.9.2 `microblx` release recipe),
+  `luasocket-jit`, `lua-json`, `lua-compat53`,
   `lua-optparse`, `lua-lsdbus`/`luajit-lsdbus`, `ffi-reflect`,
   `cproto-native`
 - `recipes-devtools/luaunit` -- Lua unit testing framework (used by
@@ -74,7 +75,6 @@ Set via e.g. `PACKAGECONFIG:pn-microblx-latest += "..."`:
 
 | Option             | Default | Description                                                                                  |
 |--------------------|---------|----------------------------------------------------------------------------------------------|
-| `USE_LFDS_611`     | on      | build the legacy `lfds_cyclic` iblock against liblfds 6.1.1 (deprecated, prefer `lfrb`)       |
 | `BLOCK_WEBGRAPH`   | on      | webgraph visualization block (rdepends: `luasocket-jit`, `lua-json`)                          |
 | `UBX_LOG_DAEMON`   | on      | build `ubx-log` with daemonization support (libdaemon, auto-detected by cmake)                |
 | `BLOCK_LSDB_INTF`  | off     | D-Bus introspection/control block (rdepends: `luajit-lsdbus`, `lua-optparse`)                 |
