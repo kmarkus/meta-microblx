@@ -31,7 +31,8 @@ inherit cmake pkgconfig ptest
 # interpreter and dbus session per test file (see files/run-ptest).
 # Needs 'ptest' in DISTRO_FEATURES.
 SRC_URI += "file://run-ptest"
-RDEPENDS:${PN}-ptest += "${PN}-test luaunit dbus"
+# the tests load the example models from ${datadir}/ubx/examples (in -doc)
+RDEPENDS:${PN}-ptest += "${PN}-test luaunit dbus ${PN}-doc"
 
 # for profiling
 # EXTRA_OECMAKE += "-DCMAKE_C_FLAGS=-pg -DCMAKE_CXX_FLAGS=-pg"

@@ -23,6 +23,8 @@ sed "s|<listen>.*</listen>|<listen>unix:path=$bus</listen>|" \
 	tests/dbus-test.conf > "$tmp/dbus-test.conf"
 export DBUS_SYSTEM_BUS_ADDRESS="unix:path=$bus"
 
+rc=0
+
 for f in tests/test_*.lua; do
 	t=$(basename "$f" .lua)
 
@@ -31,13 +33,15 @@ for f in tests/test_*.lua; do
 		echo "PASS: $t"
 	else
 		echo "FAIL: $t"
+		rc=1
 		sed 's/^/# /' "$log"
 	fi
 done
 
 # the C tests (liblfq, liblfb, rtlog), if this version has them
 if [ -x tests/run_c_tests.sh ]; then
-	tests/run_c_tests.sh
+	tests/run_c_tests.sh || rc=1
 fi
 
 rm -rf "$log" "$tmp"
+exit $rc
