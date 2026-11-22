@@ -1,13 +1,13 @@
 SUMMARY = "Reflection of C data types"
 DESCRIPTION = "Parse C type declarations at runtime, compute their layout \
 and access instances generically, with a command line tool and Lua bindings."
-HOMEPAGE = "https://gitlab.com/kmarkus/libcreflect"
+HOMEPAGE = "https://github.com/kmarkus/creflect"
 LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ec28527f3d544b51ceb0e1907d0bf3f"
 
 PV = "0.1.0+git"
 SRCREV = "980762529588c276a720a6c6b585165eecbe562b"
-SRC_URI = "git://gitlab.com/kmarkus/libcreflect.git;branch=main;protocol=https \
+SRC_URI = "git://github.com/kmarkus/creflect.git;branch=main;protocol=https \
            file://run-ptest \
            "
 
@@ -58,7 +58,7 @@ do_install_ptest() {
 
 PACKAGES =+ "${PN}-tool ${PN}-luajit ${PN}-lua"
 FILES:${PN}-tool = "${bindir}/crefl-tool"
-# the library is compiled into the modules, no libcreflect dependency
+# the library is compiled into the modules, no creflect dependency
 FILES:${PN}-luajit = "${libdir}/lua/5.1/creflect.so"
 FILES:${PN}-lua = "${libdir}/lua/5.[2-9]/creflect.so"
 RDEPENDS:${PN}-luajit = "luajit"
