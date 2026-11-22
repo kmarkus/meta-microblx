@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# libcreflect ptests: unit tests, the compiler oracle check programs
+# creflect ptests: unit tests, the compiler oracle check programs
 # (one per header, built for this ABI), the Lua tests and examples for
 # each Lua with the creflect module installed.
 
