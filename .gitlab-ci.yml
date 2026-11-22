@@ -1,0 +1,48 @@
+# parse the layer stack of kas/ubx-bbb.yml: catches recipe syntax errors,
+# missing layers and LAYERSERIES_COMPAT mismatches. a full build does not
+# fit the hosted runners (2 vCPU, 3 h cap, 400 min/month on free).
+parse:
+  image: ghcr.io/siemens/kas/kas:5.4
+  rules:
+    # master = wrynose and dev = scarthgap are the same commits: test once
+    - if: $CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "dev"
+      when: never
+    - changes:
+        - conf/**/*
+        - recipes-*/**/*
+        - kas/*.yml
+        - .gitlab-ci.yml
+  variables:
+    KAS_CLONE_DEPTH: "1"
+    # gitlab only caches paths below the project dir
+    KAS_WORK_DIR: $CI_PROJECT_DIR/.kas
+  cache:
+    # layer clones (incl. mtimes) and the bitbake parse cache: a warm
+    # cache reparses only changed recipes (~10 s instead of ~7 min)
+    key:
+      prefix: parse
+      files:
+        - kas/ubx-bbb.yml
+    paths:
+      - .kas/meta
+      - .kas/build/tmp/cache
+  script:
+    - git config --global --add safe.directory '*'
+    # test this commit, not the branch the kas file fetches: clone it to a
+    # branch named like the kas refspec and redirect the layer url there
+    - |
+      ref=$(sed -n '/meta\/meta-microblx:/,/refspec:/ s/.*refspec: *"\(.*\)"/\1/p' kas/ubx-bbb.yml)
+    - git -c init.defaultBranch=ci clone -q --no-checkout "$CI_PROJECT_DIR" /tmp/layer
+    - git -C /tmp/layer update-ref "refs/heads/$ref" "$CI_COMMIT_SHA"
+    - export KAS_PREMIRRORS="git@github.com:kmarkus/meta-microblx file:///tmp/layer"
+    - mkdir -p "$KAS_WORK_DIR"
+    # cached clones: drop the local branches, a legacy refspec checkout then
+    # recreates them from the freshly fetched origin instead of staying stale
+    - |
+      for r in "$KAS_WORK_DIR"/meta/*/; do
+        [ -d "$r/.git" ] || continue
+        git -C "$r" checkout -q --detach
+        git -C "$r" for-each-ref --format='%(refname:short)' refs/heads | xargs -r git -C "$r" branch -q -D
+      done
+    - kas shell --update kas/ubx-bbb.yml -c "bitbake -p"
+    - git -C "$KAS_WORK_DIR/meta/meta-microblx" log -1 --format='layer at %h %s'
