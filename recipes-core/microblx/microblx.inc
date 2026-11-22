@@ -33,6 +33,8 @@ inherit cmake pkgconfig ptest
 SRC_URI += "file://run-ptest"
 # the tests load the example models from ${datadir}/ubx/examples (in -doc)
 RDEPENDS:${PN}-ptest += "${PN}-test luaunit dbus ${PN}-doc"
+# the fdtrig gpio tests run on a gpio-sim line, they skip without it
+RRECOMMENDS:${PN}-ptest += "kernel-module-gpio-sim"
 
 # for profiling
 # EXTRA_OECMAKE += "-DCMAKE_C_FLAGS=-pg -DCMAKE_CXX_FLAGS=-pg"

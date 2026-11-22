@@ -23,6 +23,11 @@ sed "s|<listen>.*</listen>|<listen>unix:path=$bus</listen>|" \
 	tests/dbus-test.conf > "$tmp/dbus-test.conf"
 export DBUS_SYSTEM_BUS_ADDRESS="unix:path=$bus"
 
+# the fdtrig gpio tests need gpio-sim and configfs, else they skip
+modprobe -q gpio-sim 2>/dev/null
+grep -q " /sys/kernel/config configfs" /proc/mounts ||
+	mount -t configfs none /sys/kernel/config 2>/dev/null
+
 rc=0
 
 for f in tests/test_*.lua; do
