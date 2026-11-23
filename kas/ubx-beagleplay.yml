@@ -32,7 +32,7 @@ repos:
     refspec: "dev"
 
   meta/poky:
-    url: "git://git.yoctoproject.org/poky"
+    url: "https://git.yoctoproject.org/poky"
     refspec: "scarthgap"
     layers:
       meta:
@@ -40,7 +40,7 @@ repos:
       meta-yocto-bsp:
 
   meta/meta-openembedded:
-    url: "git://git.openembedded.org/meta-openembedded"
+    url: "https://git.openembedded.org/meta-openembedded"
     refspec: "scarthgap"
     layers:
       meta-oe:
@@ -48,7 +48,7 @@ repos:
 
   # beagleplay stuff
   meta/meta-ti:
-    url: "git://git.yoctoproject.org/meta-ti"
+    url: "https://git.yoctoproject.org/meta-ti"
     refspec: "scarthgap"
     layers:
       meta-ti-bsp:
@@ -56,7 +56,7 @@ repos:
       meta-ti-extras:
 
   meta/meta-arm:
-    url: "git://git.yoctoproject.org/meta-arm"
+    url: "https://git.yoctoproject.org/meta-arm"
     refspec: "scarthgap"
     layers:
       meta-arm:
