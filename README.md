@@ -103,5 +103,6 @@ Packaging notes
 Patches
 -------
 
-Please submit patches via the github issue tracker
-https://github.com/kmarkus/meta-microblx.
+Please submit patches as merge requests on GitLab:
+https://gitlab.com/kmarkus/meta-microblx. The GitHub repository is a
+read-only mirror.
